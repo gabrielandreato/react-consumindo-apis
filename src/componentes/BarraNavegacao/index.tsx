@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {FormEvent, useState} from "react"
 import { Link } from "react-router-dom"
 import BotaoNavegacao from "../BotaoNavegacao"
 import ModalCadastroUsuario from "../ModalCadastroUsuario"
@@ -6,6 +6,7 @@ import ModalLoginUsuario from "../ModalLoginUsuario"
 import logo from './assets/logo.png'
 import usuario from './assets/usuario.svg'
 import './BarraNavegacao.css'
+import {useLimparToken, useObterToken} from "../../hooks";
 
 const BarraNavegacao = () => {
 
@@ -17,6 +18,14 @@ const BarraNavegacao = () => {
         setUsuarioEstaLogado(true)
         setModalLoginAberta(false)
     }
+
+    const Logout = (evento: FormEvent<HTMLFormElement>) => {
+        evento.preventDefault()
+        useLimparToken();
+    }
+
+
+    const token = useObterToken()
 
     const acoesQuandoDeslogado = (<>
         <li>
@@ -48,8 +57,11 @@ const BarraNavegacao = () => {
 
     const acoesQuandoLogado = (<>
         <li>
-            <Link to="/minha-conta/pedidos">Minha Conta</Link> 
+            <Link to="/minha-conta/pedidos">Minha Conta</Link>
         </li>
+        <form action="" onSubmit={() => Logout}>
+            <button>Logout</button>
+        </form>
     </>)
 
     return (<nav className="ab-navbar">
@@ -91,8 +103,8 @@ const BarraNavegacao = () => {
             </li>
         </ul>
         <ul className="acoes">
-            {usuarioEstaLogado ? acoesQuandoLogado : acoesQuandoDeslogado}
-        </ul>   
+            {token ? acoesQuandoLogado : acoesQuandoDeslogado}
+        </ul>
     </nav>)
 }
 

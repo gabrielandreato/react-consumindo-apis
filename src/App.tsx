@@ -1,12 +1,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import Rotas from './rotas';
+import Rotas from './routes';
+import {RecoilRoot} from "recoil";
 
 function App() {
-  return (<BrowserRouter>
-      <Rotas />
-    </BrowserRouter>
+  return (
+      <RecoilRoot>
+        <BrowserRouter>
+            <Rotas />
+        </BrowserRouter>
+      </RecoilRoot>
   );
 }
 

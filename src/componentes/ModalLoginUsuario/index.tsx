@@ -5,6 +5,8 @@ import { useState } from "react"
 import imagemPrincipal from './assets/login.png'
 
 import './ModalLoginUsuario.css'
+import {usePersistirToken} from "../../hooks";
+import {resetFirstInputPolyfill} from "web-vitals/dist/modules/lib/polyfills/firstInputPolyfill";
 
 interface PropsModalLoginUsuario {
     aberta: boolean
@@ -17,6 +19,8 @@ const ModalLoginUsuario = ({ aberta, aoFechar, aoEfetuarLogin } : PropsModalLogi
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
+    const setToken = usePersistirToken();
+
     const aoSubmeterFormular = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
         const usuario = {
@@ -25,7 +29,7 @@ const ModalLoginUsuario = ({ aberta, aoFechar, aoEfetuarLogin } : PropsModalLogi
         }
         axios.post('http://localhost:8000/public/login', usuario)
             .then(reposta => {
-                sessionStorage.setItem('token', reposta.data.access_token)
+                setToken(reposta.data.access_token)
                 setEmail('')
                 setSenha('')
                 aoEfetuarLogin()
