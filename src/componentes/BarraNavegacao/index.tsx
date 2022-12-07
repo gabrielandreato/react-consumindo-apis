@@ -1,5 +1,5 @@
 import {FormEvent, useState} from "react"
-import { Link } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import BotaoNavegacao from "../BotaoNavegacao"
 import ModalCadastroUsuario from "../ModalCadastroUsuario"
 import ModalLoginUsuario from "../ModalLoginUsuario"
@@ -14,14 +14,18 @@ const BarraNavegacao = () => {
     const [modalLoginAberta, setModalLoginAberta] = useState(false)
     const [usuarioEstaLogado, setUsuarioEstaLogado] = useState(false)
 
+    let navigate = useNavigate()
+
     const aoEfetuarLogin = () => {
         setUsuarioEstaLogado(true)
         setModalLoginAberta(false)
     }
 
-    const Logout = (evento: FormEvent<HTMLFormElement>) => {
-        evento.preventDefault()
-        useLimparToken();
+    const aoEfetuarLogout = () => {
+        setUsuarioEstaLogado(false)
+        sessionStorage.removeItem('token')
+        navigate('/')
+
     }
 
 
@@ -59,9 +63,15 @@ const BarraNavegacao = () => {
         <li>
             <Link to="/minha-conta/pedidos">Minha Conta</Link>
         </li>
-        <form action="" onSubmit={() => Logout}>
-            <button>Logout</button>
-        </form>
+        <li>
+        <BotaoNavegacao
+            texto="Logout"
+            textoAltSrc="Icone representando um usuário"
+            imagemSrc={usuario}
+            onClick={aoEfetuarLogout}
+        />
+        </li>
+
     </>)
 
     return (<nav className="ab-navbar">

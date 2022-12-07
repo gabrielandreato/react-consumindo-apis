@@ -1,13 +1,10 @@
 import IPedido from "../../../../interfaces/IPedido";
-import { AbBotao } from 'ds-alurabooks';
-import pedidos from "../index";
+import {AbBotao} from 'ds-alurabooks';
 
 const Pedido = (pedido: IPedido) => {
 
     const formatador = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'})
 
-
-    
     return (
         <>
             <div>

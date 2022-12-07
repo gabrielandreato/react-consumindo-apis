@@ -2,16 +2,12 @@ import Pedido from "./Pedido";
 import IPedido from "../../../interfaces/IPedido";
 import './Pedidos.css'
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {useObterToken} from "../../../hooks";
 import {AbBotao} from "ds-alurabooks";
-import pedido from "./Pedido";
 import http from "../../../http";
 
 
 const Pedidos = () => {
 
-    const token = useObterToken()
     const [listaPedidos, setListaPedidos] = useState<IPedido[]>([])
 
     useEffect(() => {

@@ -3,6 +3,7 @@ import PaginaBase from './../pages/PaginaBase/index';
 import Home from './../pages/Home/index';
 import AreaLogada from './../pages/MinhaConta/index';
 import Pedidos from './../pages/MinhaConta/Pedidos/index';
+import SeusDados from "../pages/MinhaConta/SeusDados";
 
 
 
@@ -12,6 +13,7 @@ const Rotas = () => {
         <Route path='/' element={<Home />} />
         <Route path='/minha-conta' element={<AreaLogada />}>
             <Route path="pedidos" element={<Pedidos />} />
+            <Route path="dados" element={<SeusDados />} />
          </Route>
       </Route>
     </Routes>)
